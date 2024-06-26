@@ -91,15 +91,18 @@ export const fetchMarketNews = async (): Promise<any> => {
 const API_KEYY = 'fBqAcgchRGvVqMRgK7FE2bgWmLoyoZ1y'; // Replace with your actual API key
 const BASE_URL_PERF = 'https://financialmodelingprep.com/api/v3';
 
-export const fetchSectorPerformance = async (): Promise<any> => {
-  try {
-    const response = await axios.get(`${BASE_URL_PERF}/sectors-performance`, {
-      params: {
-        apikey: API_KEYY,
-      },
-    });
+export interface SectorPerformanceData {
+  sector: string;
+  changesPercentage: string;
+}
 
-    return response.data; // Return the entire response data object
+export const fetchSectorPerformance = async (): Promise<SectorPerformanceData[]> => {
+  try {
+    const constructedUrl = `${BASE_URL_PERF}/sectors-performance?apikey=${API_KEYY}`;
+    console.log(constructedUrl);
+    const response = await axios.get(constructedUrl);
+    console.log("sectorapi", response.data);
+    return response.data; // Return the array of sector performance objects
   } catch (error) {
     console.error('Error fetching sector performance:', error);
     throw error;

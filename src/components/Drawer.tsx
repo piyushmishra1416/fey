@@ -5,7 +5,6 @@ import {
   CSSObject,
   createTheme,
   ThemeProvider,
-  useTheme,
 } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -15,7 +14,7 @@ import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -26,10 +25,17 @@ import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import { alpha, Button, InputBase } from "@mui/material";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import SectorPerformance from "./SectorPerformance";
-import MarketDataComponent from "./MarketData";
-import ChartComponent from "./ChartSection";
-import NewsCard from "./MarketSummary";
+// import SectorPerformance from "./SectorPerformance";
+// import MarketDataComponent from "./MarketData";
+// import ChartComponent from "./ChartSection";
+// import NewsCard from "./MarketSummary";
+
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -190,7 +196,6 @@ export default function MiniDrawer() {
   const [currentDate, setCurrentDate] = useState("");
 
   // Use the theme hook
-  const theme = useTheme();
 
   useEffect(() => {
     const date = new Date();
@@ -214,7 +219,7 @@ export default function MiniDrawer() {
         <AppBar
           position="fixed"
           open={open}
-          sx={{ height: "15vh", justifyContent: "center", paddingX: "6%"  }}
+          sx={{ height: "15vh", justifyContent: "center", paddingX: "6%" }}
         >
           <Toolbar>
             <IconButton
@@ -227,7 +232,12 @@ export default function MiniDrawer() {
                 ...(open && { display: "none" }),
               }}
             >
-              <MenuIcon />
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </IconButton>
             <Typography variant="h6" noWrap component="div">
               Hello, Jane <br />
@@ -302,29 +312,7 @@ export default function MiniDrawer() {
             ))}
           </List>
         </Drawer>
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            mt: "100px", // Adjust this margin to match AppBar height
-            mx: `${open ? drawerWidth : theme.spacing(7) + 15}px`, // Adjust for drawer width when open or closed
-            transition: "margin 0.3s",
-            background: "#000000"
-          }}
-        >
-          <DrawerHeader />
-          <Box sx={{ display: "flex", justifyContent: 'space-between' }}>
-            <Box sx={{ flex: "1 1 25%", marginRight: "10px" }}>
-              <NewsCard />
-            </Box>
-            <Box sx={{ flex: "1 1 50%", marginLeft: "10px" }}>
-              <SectorPerformance />
-            </Box>
-          </Box>
-          <MarketDataComponent />
-          <ChartComponent />
-        </Box>
+        
       </Box>
     </ThemeProvider>
   );
