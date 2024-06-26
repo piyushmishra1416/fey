@@ -22,8 +22,8 @@ function App() {
               backgroundColor: "#0b0b0f",
               padding: "2%",
               borderRadius: "10px",
-              width: ["100%", "100%", "45%"], // Adjust width for different screen sizes
-              marginBottom: ["15px", "15px", "0"], // Add bottom margin for smaller screens
+              width: ["100%", "100%", "45%"], 
+              marginBottom: ["15px", "15px", "0"], 
             }}
           >
             <NewsCard />
