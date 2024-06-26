@@ -25,10 +25,8 @@ import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 import { alpha, Button, InputBase } from "@mui/material";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-// import SectorPerformance from "./SectorPerformance";
-// import MarketDataComponent from "./MarketData";
-// import ChartComponent from "./ChartSection";
-// import NewsCard from "./MarketSummary";
+import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
+import TvOutlinedIcon from "@mui/icons-material/TvOutlined";
 
 import {
   SignedIn,
@@ -39,7 +37,7 @@ import {
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
+  borderRadius: "25px", // Fully rounded corners
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -52,6 +50,26 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  borderRadius: "25px", // Fully rounded corners
+  "& .MuiInputBase-input": {
+    padding: "1%", // Using percentage padding for responsiveness
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%", // Ensure it takes the full width
+    [theme.breakpoints.up("sm")]: {
+      width: "50%", // Adjust the width for small screens
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "70%", // Adjust the width for medium screens
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "80%", // Adjust the width for large screens
+    },
+  },
+}));
+
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -60,16 +78,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-  },
 }));
 
 const drawerWidth = 60; // Standard drawer width
@@ -240,19 +248,35 @@ export default function MiniDrawer() {
               </SignedIn>
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              Hello, Jane <br />
-              {currentDate}
+              <span style={{ fontWeight: "bold" }}>Hello, Jane</span> <br />
+              <span style={{ color: "#959595" }}>{currentDate}</span>
             </Typography>
-            <Box sx={{ display: "flex", gap: 1, ml: "auto" }}>
-              <StyledButton variant="contained" color="primary">
+            <Box
+              sx={{
+                display: { xs: "none", sm: "none", md: "flex" },
+                gap: 1,
+                ml: "auto",
+              }}
+            >
+              <StyledButton
+                variant="contained"
+                color="primary"
+                sx={{ color: "#959595" }}
+                startIcon={<ExploreOutlinedIcon />}
+              >
                 For you
               </StyledButton>
-              <StyledButton variant="contained" color="secondary">
+              <StyledButton
+                variant="contained"
+                color="secondary"
+                sx={{ color: "#959595" }}
+                startIcon={<TvOutlinedIcon />}
+              >
                 Screener
               </StyledButton>
               <Search>
                 <SearchIconWrapper>
-                  <SearchIcon />
+                  <SearchIcon sx={{ color: "#959595" }} fontSize="large" />
                 </SearchIconWrapper>
                 <StyledInputBase inputProps={{ "aria-label": "search" }} />
               </Search>
@@ -288,7 +312,12 @@ export default function MiniDrawer() {
               <ListItem
                 key={item.text}
                 disablePadding
-                sx={{ display: "block" }}
+                sx={{
+                  display: "block",
+                  "&:hover": {
+                    borderRight: "2px solid #1B538D", // Add right border on hover
+                  },
+                }}
               >
                 <ListItemButton
                   sx={{
@@ -302,7 +331,9 @@ export default function MiniDrawer() {
                       minWidth: 0,
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
-                      color: "#BB86FC",
+                      "&:hover": {
+                        color: "#1B538D", // Change color on hover
+                      },
                     }}
                   >
                     {item.icon}
@@ -312,7 +343,6 @@ export default function MiniDrawer() {
             ))}
           </List>
         </Drawer>
-        
       </Box>
     </ThemeProvider>
   );

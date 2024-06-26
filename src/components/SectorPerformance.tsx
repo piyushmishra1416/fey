@@ -91,7 +91,7 @@ const SectorPerformance: React.FC = () => {
             opacity: 0.4,
             marginLeft: "auto",
             alignItems: "center",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           % price change
@@ -99,10 +99,10 @@ const SectorPerformance: React.FC = () => {
       </Box>
 
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <TableContainer
             component={Paper}
-            sx={{ backgroundColor: theme.palette.grey[900] }}
+            sx={{ backgroundColor: theme.palette.grey[900], width: "100%" }}
           >
             <Table
               sx={{
@@ -121,7 +121,6 @@ const SectorPerformance: React.FC = () => {
                       fontSize: "16px",
                     }}
                   >
-                    {" "}
                     All sectors
                   </TableCell>
                   <TableCell
@@ -145,10 +144,9 @@ const SectorPerformance: React.FC = () => {
                       background: createGradient(
                         sector.changesPercentage.includes("-")
                       ),
-                      color: "#3b372e",
                     }}
                   >
-                    <TableCell sx={{ color: "white" }}>
+                    <TableCell sx={{ color: "#959595" }}>
                       {sector.sector}
                     </TableCell>
                     <TableCell
@@ -167,8 +165,11 @@ const SectorPerformance: React.FC = () => {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid item xs={6}>
-          <TableContainer component={Paper} sx={{ backgroundColor: "#0b0b0f" }}>
+        <Grid item xs={12} sm={6}>
+          <TableContainer
+            component={Paper}
+            sx={{ backgroundColor: "#0b0b0f", width: "100%" }}
+          >
             <Table
               sx={{
                 [`& .${tableCellClasses.root}`]: {
@@ -186,7 +187,7 @@ const SectorPerformance: React.FC = () => {
                       ),
                     }}
                   >
-                    <TableCell sx={{ color: "white" }}>
+                    <TableCell sx={{ color: "#959595" }}>
                       {sector.sector}
                     </TableCell>
                     <TableCell

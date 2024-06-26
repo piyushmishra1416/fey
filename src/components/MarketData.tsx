@@ -74,15 +74,17 @@ const MarketDataComponent: React.FC = () => {
                     ? `+${item.DailyChange}`
                     : item.DailyChange}
                 </TableCell>
-
+               
                 <TableCell
                   align="right"
                   sx={{
+                     //@ts-ignore
                     color: getColor(parseFloat(item.PercentageChange)),
                     fontWeight: 600, // Optionally increase font weight for emphasis
                   }}
                 >
                   <Box sx={{ backgroundColor: `${getColor(
+                      //@ts-ignore
                       parseFloat(item.PercentageChange)
                     )}22`, 
                     padding: "8px", borderRadius: "10px"}}>

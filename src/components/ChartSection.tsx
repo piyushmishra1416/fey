@@ -38,17 +38,33 @@ const ChartComponent: React.FC = () => {
         label: `${symbol} Price`,
         data: data ? data.close : [],
         fill: false,
+        pointRadius: 0,
         backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(255,255,255, 1)',
+        borderWidth: 1
       }
-    ]
+    ],
   };
+
+  const options = {
+    responsive: true,
+    scales: {
+    x: {
+      display: false 
+    },
+  },}
 
   return (
     <div className="container mx-auto my-8 p-4">
-      <h1 className="text-2xl font-bold mb-4">Market Index Chart</h1>
+      
+      {loading ? (
+        <div className="text-center">Loading...</div>
+      ) : error ? (
+        <div className="text-center text-red-500">Error: {error}</div>
+      ) : (
+        <Line  data={chartData} options={options} />
+      )}
       <div className="mb-4">
-        <label className="mr-2">Select Time Range:</label>
         {timeRanges.map(range => (
           <button
             key={range}
@@ -59,13 +75,6 @@ const ChartComponent: React.FC = () => {
           </button>
         ))}
       </div>
-      {loading ? (
-        <div className="text-center">Loading...</div>
-      ) : error ? (
-        <div className="text-center text-red-500">Error: {error}</div>
-      ) : (
-        <Line data={chartData} />
-      )}
     </div>
   );
 };

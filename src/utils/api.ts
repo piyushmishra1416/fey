@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const RAPIDAPI_KEY = '39a139cfddmshf842321ccc06578p11a68bjsndb8ef3a37b1d'; // Replace with your actual RapidAPI key
+const RAPIDAPI_KEY = '52bbbf0c15msh74c2aba521ad6e8p122fd6jsn9a501598f67d'; // Replace with your actual RapidAPI key
 const BASE_URL_QUOTES = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes';
 const BASE_URL_CHART = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart';
 const BASE_URL_FINNHUB = 'https://finnhub.io/api/v1';
@@ -108,3 +108,5 @@ export const fetchSectorPerformance = async (): Promise<SectorPerformanceData[]>
     throw error;
   }
 };
+//gy- tokens
+
