@@ -18,7 +18,7 @@ function App() {
           <Box
             sx={{
               marginRight: ["0", "0", "10px"],
-              marginLeft: ["7.5%", "7.5%", "10px"],
+              marginLeft: ["8.5%", "7.5%", "10px"],
               backgroundColor: "#0b0b0f",
               padding: "2%",
               borderRadius: "10px",
@@ -46,7 +46,7 @@ function App() {
           <Box sx={{ width: ["100%", "100%", "100%", "40%", ],  marginLeft: ["8.5%", "7.5%", "10px"], }}>
             <MarketDataComponent />
           </Box>
-          <Box sx={{ marginLeft: "5%", width: ["100%", "100%", "100%", "60%"] }}>
+          <Box sx={{  marginLeft: ["8.5%", "7.5%", "10px"], width: ["100%", "100%", "100%", "60%"],  }}>
             <ChartComponent />
           </Box>
         </Box>

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const RAPIDAPI_KEY = '52bbbf0c15msh74c2aba521ad6e8p122fd6jsn9a501598f67d'; // Replace with your actual RapidAPI key
 const BASE_URL_QUOTES = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes';
 const BASE_URL_CHART = 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-chart';
 const BASE_URL_FINNHUB = 'https://finnhub.io/api/v1';
+const BASE_URL_PERF = 'https://financialmodelingprep.com/api/v3';
 
 const symbols = ['^GSPC', '^IXIC', '^DJI', 'CL=F', 'GC=F', 'SI=F', 'BTC-USD'];
 
@@ -19,7 +19,7 @@ export const fetchMarketIndices = async (): Promise<MarketData[]> => {
     const response = await axios.get(BASE_URL_QUOTES, {
       headers: {
         'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com',
-        'x-rapidapi-key': RAPIDAPI_KEY,
+        'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY, // Adjust this according to your environment
       },
       params: {
         region: 'US',
@@ -51,13 +51,13 @@ export const fetchHistoricalData = async (symbol: string, range: string): Promis
     const response = await axios.get(BASE_URL_CHART, {
       headers: {
         'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com',
-        'x-rapidapi-key': RAPIDAPI_KEY,
+        'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY, // Adjust this according to your environment
       },
       params: {
         symbol: symbol,
         range: range,
         region: 'US',
-        interval: range === '1d' ? '5m' : '1d', // Use 5-minute interval for 1 day, 1 day interval for others
+        interval: range === '1d' ? '5m' : '1d',
       }
     });
 
@@ -77,19 +77,16 @@ export const fetchMarketNews = async (): Promise<any> => {
     const response = await axios.get(`${BASE_URL_FINNHUB}/news`, {
       params: {
         category: 'general',
-        token: 'cpo62qpr01qj9etuuht0cpo62qpr01qj9etuuhtg', // Replace with your actual Finnhub API token
+        token: import.meta.env.VITE_FINNHUB_KEY, // Adjust this according to your environment
       },
     });
 
-    return response.data; // Return the entire response data object
+    return response.data; 
   } catch (error) {
     console.error('Error fetching market news:', error);
     throw error;
   }
 };
-
-const API_KEYY = 'fBqAcgchRGvVqMRgK7FE2bgWmLoyoZ1y'; // Replace with your actual API key
-const BASE_URL_PERF = 'https://financialmodelingprep.com/api/v3';
 
 export interface SectorPerformanceData {
   sector: string;
@@ -98,15 +95,13 @@ export interface SectorPerformanceData {
 
 export const fetchSectorPerformance = async (): Promise<SectorPerformanceData[]> => {
   try {
-    const constructedUrl = `${BASE_URL_PERF}/sectors-performance?apikey=${API_KEYY}`;
-    console.log(constructedUrl);
+    console.log("apikey", import.meta.env.VITE_API_KEYY);
+    const constructedUrl = `${BASE_URL_PERF}/sectors-performance?apikey=${import.meta.env.VITE_API_KEYY}`;
+    console.log("URL", constructedUrl);
     const response = await axios.get(constructedUrl);
-    console.log("sectorapi", response.data);
-    return response.data; // Return the array of sector performance objects
+    return response.data; // Ensure this matches the structure of the response data
   } catch (error) {
     console.error('Error fetching sector performance:', error);
     throw error;
   }
 };
-//gy- tokens
-
