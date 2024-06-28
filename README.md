@@ -1,3 +1,10 @@
+# Screenshots
+
+![Screen 1](./src/assets/screen1.png)
+![Screen 2](./src/assets/screen2.png)
+![Mobile Screen](./src/assets/mobilescreen.png)
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
